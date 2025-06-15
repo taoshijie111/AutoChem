@@ -1,0 +1,23 @@
+# Configuration file for quantum chemistry automation
+# This file defines the computational workflows and parameters
+
+xtb:
+  # XTB calculation commands - executed sequentially
+  # Use {} as placeholder for input files
+  command:
+    # First step: geometry optimization with implicit solvent (benzene)
+    - 'xtb {} --opt normal --gbsa benzene'
+    # Second step: vertical ionization potential and electron affinity calculation
+    - 'xtb xtbopt.xyz --vipea --gbsa benzene'
+
+# Additional configuration sections can be added here for other calculation types
+# For example:
+# gaussian:
+#   template_file: "gaussian_template.gjf"
+#   memory: "8GB"
+#   processors: 4
+#
+# orca:
+#   method: "B3LYP"
+#   basis_set: "def2-TZVP"
+#   solvent: "benzene"

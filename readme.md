@@ -1,3 +1,11 @@
-# 从smiles.smi生成.xyz文件
-不执行力场优化：python main.py test.smi --coords-only --tag test --no-optimize 
-选择力场： python main.py test.smi --coords-only --tag test --force-field MMFF94 --optimization-steps 1000
+# Generate coordinates only
+python main.py coords input.smi --tag my_molecules
+
+# Run XTB calculations on SMI file (requires config.yaml)
+python main.py xtb input.smi --config config.yaml
+
+# Run XTB calculations on XYZ directory
+python main.py xtb /path/to/xyz/files --config config.yaml
+
+# Combined workflow (SMI -> XYZ -> XTB)
+python main.py combined input.smi --config config.yaml

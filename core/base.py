@@ -29,7 +29,39 @@ class BaseCoordinateGenerator(ABC):
     def save_xyz_file(self, xyz_content: str, output_path: Path) -> None:
         """Save XYZ content to file"""
         pass
+
+
+class BaseCalculator(ABC):
+    """Abstract base class for quantum chemistry calculations"""
     
+    @abstractmethod
+    def calculate_batch(self, xyz_files: List[Path], output_dir: Path) -> Dict[str, Any]:
+        """
+        Perform calculations on batch of XYZ files
+        
+        Args:
+            xyz_files: List of XYZ file paths
+            output_dir: Output directory for results
+            
+        Returns:
+            Dictionary with calculation results
+        """
+        pass
+    
+    @abstractmethod
+    def calculate_single(self, xyz_file: Path, output_dir: Path) -> str:
+        """
+        Perform calculation on single XYZ file
+        
+        Args:
+            xyz_file: XYZ file path
+            output_dir: Output directory for results
+            
+        Returns:
+            Result message
+        """
+        pass
+
 
 class BaseInputGenerator(ABC):
     """Abstract base class for quantum chemistry input file generation"""
