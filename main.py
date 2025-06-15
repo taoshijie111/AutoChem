@@ -135,6 +135,25 @@ class QuantumChemWorkflow:
             results = self.xtb_calculator.calculate_batch(xyz_files, xtb_output_dir)
             
             logger.info(f"XTB calculation workflow completed. Results: {results['success']}/{results['total']} successful")
+            
+            # Convert XYZ files if requested
+            if self.args.out_xyz:
+                save_dir = xtb_output_dir.parent / f"{xtb_output_dir.name}_xyz"
+                save_dir.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Converting XYZ files to {save_dir}")
+                # Process each XYZ file in the output directory
+                for xyz_file in [child for child in xtb_output_dir.iterdir() if child.is_dir()]:
+                    name = list(xyz_file.glob('molecule_*.xyz'))[0]
+                    if (xyz_file / 'xtbopt.xyz').exists():
+                        with open(xyz_file / 'xtbopt.xyz', 'r') as f:
+                            coord_lines = f.readlines()[3:]
+                        with open(name, 'r') as f:
+                            title_lines = f.readlines()[:2]
+                        
+                        with open(save_dir / f"{name.stem}.xyz", 'w') as f:
+                            f.writelines(title_lines + coord_lines)                    
+                    
+                logger.info(f"Converted XYZ files saved to {xtb_output_dir}")
             return xtb_output_dir
             
         except Exception as e:
@@ -257,6 +276,8 @@ Examples:
                            help="Number of optimization steps for coordinates")
     xtb_parser.add_argument("--no-optimize", action="store_true", 
                            help="Skip force field optimization for coordinates")
+    xtb_parser.add_argument("--out_xyz", action="store_true", 
+                           help="Convert xyz file from XTB")
     
     # Combined workflow command
     combined_parser = subparsers.add_parser('combined', help='Run complete SMILES-to-XTB workflow')
@@ -272,6 +293,8 @@ Examples:
                                 help="Number of optimization steps")
     combined_parser.add_argument("--no-optimize", action="store_true", 
                                 help="Skip force field optimization")
+    combined_parser.add_argument("--out_xyz", action="store_true", 
+                           help="Convert xyz file from XTB")
     
     # Global arguments
     parser.add_argument("--log-level", default="WARNING", 

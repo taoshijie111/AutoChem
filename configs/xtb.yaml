@@ -6,9 +6,9 @@ xtb:
   # Use {} as placeholder for input files
   command:
     # First step: geometry optimization with implicit solvent (benzene)
-    - 'xtb {} --opt normal --gbsa benzene'
+    - 'xtb {} --opt normal -P 1'
     # Second step: vertical ionization potential and electron affinity calculation
-    - 'xtb xtbopt.xyz --vipea --gbsa benzene'
+    # - 'xtb xtbopt.xyz --vipea --gbsa benzene'
 
 # Additional configuration sections can be added here for other calculation types
 # For example:
