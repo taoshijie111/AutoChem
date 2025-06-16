@@ -1,0 +1,5 @@
+%nproc=8
+%mem=32GB
+#p b3lyp AUG-cc-pVTZ  
+
+1 2

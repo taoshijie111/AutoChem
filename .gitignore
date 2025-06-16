@@ -173,3 +173,4 @@ cython_debug/
 
 input_files/
 output_files/
+scripts/XTB/test

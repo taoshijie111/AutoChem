@@ -146,7 +146,7 @@ class QuantumChemWorkflow:
                     name = list(xyz_file.glob('molecule_*.xyz'))[0]
                     if (xyz_file / 'xtbopt.xyz').exists():
                         with open(xyz_file / 'xtbopt.xyz', 'r') as f:
-                            coord_lines = f.readlines()[3:]
+                            coord_lines = f.readlines()[2:]
                         with open(name, 'r') as f:
                             title_lines = f.readlines()[:2]
                         
