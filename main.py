@@ -267,8 +267,8 @@ Examples:
     xtb_parser.add_argument("source", help="SMI file name or XYZ directory path")
     xtb_parser.add_argument("--config", type=Path, required=True, 
                            help="Configuration YAML file")
-    xtb_parser.add_argument("--max-workers", type=int, 
-                           help="Maximum number of parallel workers")
+    xtb_parser.add_argument('-cpu', "--max-workers", type=int, 
+                           help="Maximum number of parel workers")
     xtb_parser.add_argument("--force-field", default="MMFF94",
                            choices=["MMFF94", "UFF", "GAFF"],
                            help="Force field for coordinate generation (if needed)")

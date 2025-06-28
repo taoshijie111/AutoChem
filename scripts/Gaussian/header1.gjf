@@ -1,5 +1,5 @@
-%nproc=8
+%nproc=4
 %mem=32GB
-#p b3lyp AUG-cc-pVTZ  
+#p b3lyp Def2SVP integral=ultrafine
 
 1 2

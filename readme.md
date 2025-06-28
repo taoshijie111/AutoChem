@@ -36,6 +36,7 @@ The placeholder `{}` in commands will be replaced with the appropriate input fil
 **Generate 3D coordinates from SMILES:**
 
 ```bash
+export OMP_NUM_THREADS=1
 python main.py coords input.smi --tag molecular_set_01
 ```
 
@@ -44,6 +45,7 @@ This command reads SMILES strings from `input.smi` and generates optimized 3D co
 **Run XTB calculations on existing XYZ files:**
 
 ```bash
+export OMP_NUM_THREADS=1
 python main.py xtb /path/to/xyz/directory --config config.yaml
 ```
 
@@ -52,6 +54,7 @@ This command processes all XYZ files in the specified directory using the calcul
 **Run XTB calculations to output xyz files:**
 
 ```bash
+export OMP_NUM_THREADS=1
 python main.py xtb /path/to/xyz/directory --config config.yaml --out_xyz
 ```
 This command will yield the molecular structure optimized using xtb.
@@ -59,6 +62,7 @@ This command will yield the molecular structure optimized using xtb.
 **Execute complete SMILES-to-XTB workflow:**
 
 ```bash
+export OMP_NUM_THREADS=1
 python main.py combined input.smi --config config.yaml
 ```
 
