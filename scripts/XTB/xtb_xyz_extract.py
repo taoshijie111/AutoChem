@@ -59,4 +59,4 @@ def find_and_extract_xyz_data(root_directory, file_name='xtbopt.xyz'):
     
 if __name__ == '__main__':
     xyz_data = find_and_extract_xyz_data('/home/user/data/AutoChem/output_files/xtb_OSC_20250627_093955', file_name='xtbopt.xyz')
-    xyz_data.to_csv('./xyz_data.csv')
+    xyz_data.to_csv('./xyz_data.csv', index=None)
