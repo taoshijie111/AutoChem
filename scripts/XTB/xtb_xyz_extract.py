@@ -23,7 +23,7 @@ def read_xyz(file_path):
     return atoms, np.array(coordinates)
 
 
-def find_and_extract_xyz_data(root_directory, file_name='xtbopt.xyz'):
+def find_and_extract_xyz_data(root_directory, file_name='xtbopt.xyz', output_name='xtb_optxyz'):
     found_files = 0
     successful_extractions = 0
     data_list = []
@@ -48,15 +48,20 @@ def find_and_extract_xyz_data(root_directory, file_name='xtbopt.xyz'):
     print(f"成功提取完整数据: {successful_extractions} 个")
     print(f"总数据条目: {len(data_list)} 个")
     
-    if not data_list:
-        return pd.DataFrame(columns=['name', 'atoms', 'coordinates'])
-    
-    df = pd.DataFrame(data_list)
-    df = df.sort_values('name').reset_index(drop=True)
-    
-    return df
+    if data_list:
+        names = [item['name'] for item in data_list]
+        atoms_list = [item['atoms'] for item in data_list]
+        coords_list = [item['coordinates'] for item in data_list]
+
+        np.savez_compressed(
+            output_name,
+            names=np.array(names, dtype=object),
+            atoms=np.array(atoms_list, dtype=object),
+            coordinates=np.array(coords_list, dtype=object)
+        )
+
+    return data_list
     
     
 if __name__ == '__main__':
-    xyz_data = find_and_extract_xyz_data('/home/user/data/AutoChem/output_files/xtb_OSC_20250627_093955', file_name='xtbopt.xyz')
-    xyz_data.to_csv('./xyz_data.csv', index=None)
+    xyz_data = find_and_extract_xyz_data('/home/user/data/AutoChem/output_files/xtb_OSC_20250627_093955', file_name='xtbopt.xyz', output_name='/home/user/tsj/ALMolProp/data/osc_xtb_optxyz')
