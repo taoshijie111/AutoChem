@@ -1,5 +1,5 @@
-%nproc=4
+%nproc=8
 %mem=32GB
-#p b3lyp Def2SVP integral=ultrafine
+#p opt b3lyp freq=raman AUG-cc-pVDZ int=fine em=gd3bj
 
-1 2
+0 1

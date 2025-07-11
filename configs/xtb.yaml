@@ -7,7 +7,7 @@ xtb:
   command:
     # First step: geometry optimization with implicit solvent (benzene)
     - 'xtb {} --opt normal -P 1'
-    - 'xtb xtbopt.xyz --vipea'
+    # - 'xtb xtbopt.xyz --vipea'
     # Second step: vertical ionization potential and electron affinity calculation
     # - 'xtb xtbopt.xyz --vipea --gbsa benzene'
 
